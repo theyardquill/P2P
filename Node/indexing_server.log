@@ -1,0 +1,62 @@
+2024-10-15T20:32:51.712Z Indexing server started on localhost:9000
+2024-10-15T20:34:45.926Z Received request: {"action":"register","peer_id":"8001","peer_port":"8001"}
+2024-10-15T20:34:45.926Z Registered peer 8001 at undefined:8001
+2024-10-15T20:34:45.927Z Sent response: {"status":"success","message":"Peer 8001 registered"}
+2024-10-15T20:35:04.850Z Received request: {"action":"register","peer_id":"8001","peer_port":"8001"}
+2024-10-15T20:35:04.851Z Registered peer 8001 at undefined:8001
+2024-10-15T20:35:04.851Z Sent response: {"status":"success","message":"Peer 8001 registered"}
+2024-10-15T20:35:13.419Z Received request: {"action":"register","peer_id":"8001node","peer_port":"8001node"}
+2024-10-15T20:35:13.420Z Registered peer 8001node at undefined:8001node
+2024-10-15T20:35:13.420Z Sent response: {"status":"success","message":"Peer 8001node registered"}
+2024-10-15T20:35:34.395Z Received request: {"action":"register","peer_id":"8001","peer_port":"8001"}
+2024-10-15T20:35:34.395Z Registered peer 8001 at undefined:8001
+2024-10-15T20:35:34.395Z Sent response: {"status":"success","message":"Peer 8001 registered"}
+2024-10-15T20:35:44.378Z Received request: {"action":"register","peer_id":"8002","peer_port":"8002"}
+2024-10-15T20:35:44.378Z Registered peer 8002 at undefined:8002
+2024-10-15T20:35:44.379Z Sent response: {"status":"success","message":"Peer 8002 registered"}
+2024-10-15T20:35:54.241Z Received request: {"action":"register","peer_id":"8003","peer_port":"8003"}
+2024-10-15T20:35:54.241Z Registered peer 8003 at undefined:8003
+2024-10-15T20:35:54.241Z Sent response: {"status":"success","message":"Peer 8003 registered"}
+2024-10-15T20:36:29.840Z Received request: {"action":"get_peers"}
+2024-10-15T20:36:29.840Z Sent response: {"status":"success","peers":{"8001":{"port":"8001"},"8002":{"port":"8002"},"8003":{"port":"8003"},"8001node":{"port":"8001node"}}}
+2024-10-15T20:36:51.076Z Received request: {"action":"get_peers"}
+2024-10-15T20:36:51.076Z Sent response: {"status":"success","peers":{"8001":{"port":"8001"},"8002":{"port":"8002"},"8003":{"port":"8003"},"8001node":{"port":"8001node"}}}
+2024-10-15T20:41:05.032Z Indexing server started on localhost:9000
+2024-10-15T20:41:16.014Z Received request: {"action":"register","peer_id":"8001","peer_port":"8001"}
+2024-10-15T20:41:16.015Z Registered peer 8001 at undefined:8001
+2024-10-15T20:41:16.015Z Sent response: {"status":"success","message":"Peer 8001 registered"}
+2024-10-15T20:41:21.282Z Received request: {"action":"register","peer_id":"8002","peer_port":"8002"}
+2024-10-15T20:41:21.282Z Registered peer 8002 at undefined:8002
+2024-10-15T20:41:21.282Z Sent response: {"status":"success","message":"Peer 8002 registered"}
+2024-10-15T20:41:25.329Z Received request: {"action":"register","peer_id":"8003","peer_port":"8003"}
+2024-10-15T20:41:25.329Z Registered peer 8003 at undefined:8003
+2024-10-15T20:41:25.330Z Sent response: {"status":"success","message":"Peer 8003 registered"}
+2024-10-15T20:41:38.202Z Received request: {"action":"get_peers"}
+2024-10-15T20:41:38.202Z Sent response: {"status":"success","peers":{"8001":{"port":"8001"},"8002":{"port":"8002"},"8003":{"port":"8003"}}}
+2024-10-15T20:50:03.055Z Indexing server started on localhost:9000
+2024-10-15T20:50:09.932Z Received request: {"action":"register","peer_id":"8001","peer_port":"8001"}
+2024-10-15T20:50:09.932Z Registered peer 8001 at ::1:8001
+2024-10-15T20:50:09.932Z Sent response: {"status":"success","message":"Peer 8001 registered at ::1:8001"}
+2024-10-15T20:50:14.491Z Received request: {"action":"register","peer_id":"8003","peer_port":"8003"}
+2024-10-15T20:50:14.492Z Registered peer 8003 at ::1:8003
+2024-10-15T20:50:14.492Z Sent response: {"status":"success","message":"Peer 8003 registered at ::1:8003"}
+2024-10-15T20:50:22.626Z Received request: {"action":"register","peer_id":"8002","peer_port":"8002"}
+2024-10-15T20:50:22.627Z Registered peer 8002 at ::1:8002
+2024-10-15T20:50:22.627Z Sent response: {"status":"success","message":"Peer 8002 registered at ::1:8002"}
+2024-10-15T20:50:42.635Z Received request: {"action":"get_peers"}
+2024-10-15T20:50:42.636Z Sent response: {"status":"success","peers":{"8001":{"host":"::1","port":"8001"},"8002":{"host":"::1","port":"8002"},"8003":{"host":"::1","port":"8003"}}}
+2024-10-15T20:50:49.402Z Received request: {"action":"create_topic","topic":"Global Warming","peer_id":6000}
+2024-10-15T20:50:49.402Z Created topic 'Global Warming' by peer 6000
+2024-10-15T20:50:49.402Z Sent response: {"status":"success","message":"Topic 'Global Warming' created"}
+2024-10-15T20:54:21.344Z Indexing server started on localhost:9000
+2024-10-15T20:54:28.128Z Received request: {"action":"register","peer_id":"8001","peer_port":"8001"}
+2024-10-15T20:54:28.128Z Registered peer 8001 at undefined:8001
+2024-10-15T20:54:28.128Z Sent response: {"status":"success","message":"Peer 8001 registered"}
+2024-10-15T20:54:31.309Z Received request: {"action":"register","peer_id":"8003","peer_port":"8003"}
+2024-10-15T20:54:31.309Z Registered peer 8003 at undefined:8003
+2024-10-15T20:54:31.309Z Sent response: {"status":"success","message":"Peer 8003 registered"}
+2024-10-15T20:54:34.299Z Received request: {"action":"register","peer_id":"8002","peer_port":"8002"}
+2024-10-15T20:54:34.299Z Registered peer 8002 at undefined:8002
+2024-10-15T20:54:34.299Z Sent response: {"status":"success","message":"Peer 8002 registered"}
+2024-10-15T20:54:41.687Z Received request: {"action":"get_peers"}
+2024-10-15T20:54:41.687Z Sent response: {"status":"success","peers":{"8001":{"port":"8001"},"8002":{"port":"8002"},"8003":{"port":"8003"}}}
