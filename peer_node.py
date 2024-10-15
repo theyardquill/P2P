@@ -2,12 +2,8 @@ import socket
 import threading
 import json
 import random
-import logging
 import signal
 import sys
-
-# Configure logging
-logging.basicConfig(filename='peer_node.log', level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')
 
 class PeerNode:
     def __init__(self, host='localhost', port=None, indexing_server_host='localhost', indexing_server_port=9000):
@@ -33,11 +29,9 @@ class PeerNode:
 
     def shutdown(self, signum, frame):
         print("Shutting down peer node...")
+        self.unregister_with_indexing_server()  # Unregister before exiting
         self.socket.close()
         sys.exit(0)
-
-    # ... (rest of the code remains the same)
-
 
     def register_with_indexing_server(self):
         """Register this peer node with the indexing server."""
@@ -55,6 +49,21 @@ class PeerNode:
         except Exception as e:
             print(f"Error registering with indexing server: {e}")
 
+    def unregister_with_indexing_server(self):
+        """Unregister this peer node from the indexing server."""
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.connect(self.indexing_server)
+                unregister_message = {
+                    'action': 'unregister',
+                    'peer_id': self.port
+                }
+                s.send(json.dumps(unregister_message).encode('utf-8'))
+                response = s.recv(1024).decode('utf-8')
+                print(f"Unregistration response: {response}")
+        except Exception as e:
+            print(f"Error unregistering with indexing server: {e}")
+
     def listen(self):
         """Listening thread that waits for incoming UDP messages."""
         while True:
@@ -68,16 +77,10 @@ class PeerNode:
 
     def handle_message(self, message, addr):
         """Handle incoming messages from peers."""
-        print(f"Handling message: {message} from {addr}")  # Log incoming messages
         if message['type'] == 'publish':
-            print(f"Handling publish message: {message}")
             self.distribute_message(message)  # Distribute the published message to subscribers
         elif message['type'] == 'subscribe':
-            print(f"Handling subscribe request: {message}")
-            if self.subscribe(message['topic'], addr):  # Subscribe the peer to a specific topic
-                # After subscribing, acknowledge the subscription
-                ack_message = {'type': 'ack', 'topic': message['topic']}
-                self.socket.sendto(json.dumps(ack_message).encode(), addr)
+            self.subscribe(message['topic'], addr)  # Subscribe the peer to a specific topic
         else:
             print(f"Unknown message type: {message['type']}")
 
@@ -88,10 +91,6 @@ class PeerNode:
         if addr not in self.subscribers[topic]:
             self.subscribers[topic].append(addr)  # Add the peer's address to the list of subscribers
             print(f"Subscribed {addr} to topic '{topic}'")
-            return True
-        else:
-            print(f"{addr} is already subscribed to '{topic}'")
-            return False
 
     def distribute_message(self, message):
         """Distribute a published message to all subscribers of the topic."""
@@ -100,7 +99,7 @@ class PeerNode:
             for subscriber in self.subscribers[topic]:
                 try:
                     self.socket.sendto(json.dumps(message).encode(), subscriber)
-                    print(f"Sent message to {subscriber}: {message}")  # Log the sent message
+                    print(f"Sent message to {subscriber}")
                 except Exception as e:
                     print(f"Error sending message to {subscriber}: {e}")
 
@@ -116,7 +115,6 @@ class PeerNode:
         self.distribute_message(msg)
 
 if __name__ == "__main__":
-    # If running this script, set a specific port, or choose a random one for additional nodes
     port = input("Enter a port number (or leave blank to use a random port): ")
     if port:
         node = PeerNode(port=int(port))

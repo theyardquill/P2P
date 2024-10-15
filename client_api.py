@@ -27,9 +27,6 @@ class ClientAPI:
         self.client_socket.close()
         sys.exit(0)
 
-    # ... (rest of the code remains the same)
-
-
     def select_peer_node(self, indexing_server_host='localhost', indexing_server_port=9000):
         """Query the indexing server to retrieve available peer nodes."""
         try:
@@ -45,12 +42,12 @@ class ClientAPI:
                     for idx, (peer_id, (host, port)) in enumerate(response['peers'].items()):
                         print(f"{idx + 1}: {peer_id} at {host}:{port}")
 
-                    while True:  # Loop for input validation
+                    while True:
                         choice = input("Select a peer node to connect to (enter the number): ")
                         try:
                             choice = int(choice)
                             if 1 <= choice <= len(response['peers']):
-                                break  # Valid input, exit the loop
+                                break
                             else:
                                 print("Please select a valid number.")
                         except ValueError:
@@ -71,7 +68,7 @@ class ClientAPI:
                 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     s.connect((indexing_server_host, indexing_server_port))
                     create_topic_message = {
-                        'action': 'create_topic',
+                        'action': 'add_topic',  # Use 'add_topic' instead of 'create_topic'
                         'topic': topic,
                         'peer_id': self.client_socket.getsockname()[1]  # Use client's port as peer_id
                     }
@@ -86,6 +83,27 @@ class ClientAPI:
                     return response['status'] == 'success'
             except Exception as e:
                 print(f"Error creating topic: {e}")
+        else:
+            print("Peer node is not selected.")
+        return False
+
+    def delete_topic(self, topic, indexing_server_host='localhost', indexing_server_port=9000):
+        """Delete a topic from the indexing server."""
+        if self.peer_host and self.peer_port:
+            try:
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                    s.connect((indexing_server_host, indexing_server_port))
+                    delete_topic_message = {
+                        'action': 'delete_topic',
+                        'topic': topic,
+                        'peer_id': self.client_socket.getsockname()[1]  # Use client's port as peer_id
+                    }
+                    s.send(json.dumps(delete_topic_message).encode('utf-8'))
+                    response = json.loads(s.recv(1024).decode('utf-8'))
+                    print(f"Delete topic response: {response}")
+                    return response['status'] == 'success'
+            except Exception as e:
+                print(f"Error deleting topic: {e}")
         else:
             print("Peer node is not selected.")
         return False
@@ -147,3 +165,7 @@ if __name__ == "__main__":
     if client.create_topic(topic):  # Create the topic
         client.subscribe(topic)
         client.publish(topic, "Climate change is a pressing issue affecting the entire planet.")  # Real-world info
+
+    # Test deleting a topic
+    if client.delete_topic(topic):  # Delete the topic
+        print(f"Topic '{topic}' deleted successfully.")

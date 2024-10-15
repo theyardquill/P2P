@@ -11,7 +11,7 @@ class IndexingServer:
         self.host = host
         self.port = port
         self.peers = {}  # Tracks peer nodes by peer_id as {peer_id: (host, port)}
-        self.topics = {}  # Tracks topics by topic name as {topic: peer_id}
+        self.topics = {}  # Tracks topics by topic name as {topic: [peer_id1, peer_id2]}
 
     def handle_peer(self, peer_socket, addr):
         """Handle incoming peer connections and process their requests."""
@@ -37,12 +37,16 @@ class IndexingServer:
 
         if action == 'register':
             return self.register_peer(request['peer_id'], addr[0], request['peer_port'])
+        elif action == 'unregister':
+            return self.unregister_peer(request['peer_id'])
+        elif action == 'add_topic':
+            return self.add_topic(request['peer_id'], request['topic'])
+        elif action == 'delete_topic':
+            return self.delete_topic(request['peer_id'], request['topic'])
+        elif action == 'query_topic':
+            return self.query_topic(request['topic'])
         elif action == 'get_peers':
             return self.get_peers()
-        elif action == 'create_topic':
-            return self.create_topic(request['topic'], request['peer_id'])
-        elif action == 'get_topics':
-            return self.get_topics()
         else:
             logging.warning(f"Invalid action received: {action}")
             return {'status': 'error', 'message': 'Invalid action'}
@@ -52,25 +56,59 @@ class IndexingServer:
         logging.info(f"Registered peer {peer_id} at {host}:{port}")
         return {'status': 'success', 'message': f"Peer {peer_id} registered"}
 
-    def get_peers(self):
+    def unregister_peer(self, peer_id):
+        if peer_id in self.peers:
+            del self.peers[peer_id]
+            # Remove peer from any topics it was associated with
+            for topic in list(self.topics.keys()):
+                if peer_id in self.topics[topic]:
+                    self.topics[topic].remove(peer_id)
+                    if not self.topics[topic]:
+                        del self.topics[topic]  # Remove topic if no peers hold it
+            logging.info(f"Unregistered peer {peer_id}")
+            return {'status': 'success', 'message': f"Peer {peer_id} unregistered"}
+        else:
+            return {'status': 'error', 'message': f"Peer {peer_id} not found"}
+
+    def add_topic(self, peer_id, topic):
+        if peer_id in self.peers:
+            if topic not in self.topics:
+                self.topics[topic] = []
+            if peer_id not in self.topics[topic]:
+                self.topics[topic].append(peer_id)
+            logging.info(f"Peer {peer_id} added topic '{topic}'")
+            return {'status': 'success', 'message': f"Topic '{topic}' added for peer {peer_id}"}
+        else:
+            return {'status': 'error', 'message': f"Peer {peer_id} not registered"}
+
+    def delete_topic(self, peer_id, topic):
+        if topic in self.topics and peer_id in self.topics[topic]:
+            self.topics[topic].remove(peer_id)
+            if not self.topics[topic]:
+                del self.topics[topic]
+            logging.info(f"Peer {peer_id} deleted topic '{topic}'")
+            return {'status': 'success', 'message': f"Topic '{topic}' deleted for peer {peer_id}"}
+        else:
+            return {'status': 'error', 'message': f"Topic '{topic}' not found for peer {peer_id}"}
+
+    def query_topic(self, topic):
+        if topic in self.topics and self.topics[topic]:
+            peer_id = self.topics[topic][0]  # Return the first peer holding the topic
+            logging.info(f"Query for topic '{topic}' found peer {peer_id}")
+            return {'status': 'success', 'peer_id': peer_id, 'peer_info': self.peers[peer_id]}
+        else:
+            logging.warning(f"Query for topic '{topic}' failed")
+            return {'status': 'error', 'message': f"Topic '{topic}' not found"}
+
+    def get_peers(self, exclude_port=None):
         if self.peers:
-            return {'status': 'success', 'peers': self.peers}
+            return {
+             'status': 'success',
+             'peers': {peer_id: peer_info for peer_id, peer_info in self.peers.items() if peer_info[1] != exclude_port}
+             }
         else:
-            logging.warning(f"No peers registered")
+            logging.warning("No peers registered")
             return {'status': 'error', 'message': 'No peers registered'}
-
-    def create_topic(self, topic, peer_id):
-        if topic not in self.topics:  # Avoid duplicate topic creation
-            self.topics[topic] = peer_id
-            logging.info(f"Topic '{topic}' created by peer {peer_id}")
-            return {'status': 'success', 'message': f"Topic '{topic}' created"}
-        else:
-            logging.warning(f"Topic '{topic}' already exists.")
-            return {'status': 'error', 'message': f"Topic '{topic}' already exists."}
-
-    def get_topics(self):
-        """Return the list of existing topics."""
-        return {'status': 'success', 'topics': list(self.topics.keys())}
 
     def start(self):
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
