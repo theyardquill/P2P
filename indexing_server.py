@@ -100,14 +100,11 @@ class IndexingServer:
             logging.warning(f"Query for topic '{topic}' failed")
             return {'status': 'error', 'message': f"Topic '{topic}' not found"}
 
-    def get_peers(self, exclude_port=None):
+    def get_peers(self):
         if self.peers:
-            return {
-             'status': 'success',
-             'peers': {peer_id: peer_info for peer_id, peer_info in self.peers.items() if peer_info[1] != exclude_port}
-             }
+            return {'status': 'success', 'peers': self.peers}
         else:
-            logging.warning("No peers registered")
+            logging.warning(f"No peers registered")
             return {'status': 'error', 'message': 'No peers registered'}
 
     def start(self):

@@ -10,7 +10,6 @@ class PeerNode:
         self.host = host
         self.port = port if port is not None else random.randint(5000, 6000)
         self.indexing_server = (indexing_server_host, indexing_server_port)  # Indexing server address
-        self.topics = []  # Tracks topics hosted by this peer
         self.subscribers = {}  # Dictionary to store subscribers by topic
 
         # Set up a UDP socket and bind to the provided host and port
@@ -102,17 +101,6 @@ class PeerNode:
                     print(f"Sent message to {subscriber}")
                 except Exception as e:
                     print(f"Error sending message to {subscriber}: {e}")
-
-    def publish(self, topic, content):
-        """Publish a message to a topic, distributing it to all subscribers."""
-        msg = {
-            'type': 'publish',
-            'topic': topic,
-            'message': content
-        }
-        # Send the message to all subscribers
-        print(f"Publishing message: {msg}")  # Log the published message
-        self.distribute_message(msg)
 
 if __name__ == "__main__":
     port = input("Enter a port number (or leave blank to use a random port): ")

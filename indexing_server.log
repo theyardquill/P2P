@@ -435,3 +435,65 @@
 2024-10-15 22:15:08,377 INFO:Peer 6000 deleted topic 'Global Warming'
 2024-10-15 22:15:08,377 INFO:Sent response: {'status': 'success', 'message': "Topic 'Global Warming' deleted for peer 6000"} to ('127.0.0.1', 59684)
 2024-10-15 22:15:08,377 INFO:Peer ('127.0.0.1', 59684) disconnected
+2024-10-15 22:39:52,514 INFO:Indexing server listening on localhost:9000
+2024-10-15 22:40:14,661 INFO:Peer connected from ('127.0.0.1', 36928)
+2024-10-15 22:40:14,661 INFO:Received request: {'action': 'register', 'peer_id': 6000, 'peer_port': 6000} from ('127.0.0.1', 36928)
+2024-10-15 22:40:14,661 INFO:Registered peer 6000 at 127.0.0.1:6000
+2024-10-15 22:40:14,662 INFO:Sent response: {'status': 'success', 'message': 'Peer 6000 registered'} to ('127.0.0.1', 36928)
+2024-10-15 22:40:14,662 INFO:Peer ('127.0.0.1', 36928) disconnected
+2024-10-15 22:41:52,355 INFO:Peer connected from ('127.0.0.1', 32900)
+2024-10-15 22:41:52,355 INFO:Received request: {'action': 'register', 'peer_id': 5560, 'peer_port': 5560} from ('127.0.0.1', 32900)
+2024-10-15 22:41:52,356 INFO:Registered peer 5560 at 127.0.0.1:5560
+2024-10-15 22:41:52,356 INFO:Sent response: {'status': 'success', 'message': 'Peer 5560 registered'} to ('127.0.0.1', 32900)
+2024-10-15 22:41:52,356 INFO:Peer ('127.0.0.1', 32900) disconnected
+2024-10-15 22:41:55,979 INFO:Peer connected from ('127.0.0.1', 32906)
+2024-10-15 22:41:55,979 INFO:Received request: {'action': 'register', 'peer_id': 5951, 'peer_port': 5951} from ('127.0.0.1', 32906)
+2024-10-15 22:41:55,979 INFO:Registered peer 5951 at 127.0.0.1:5951
+2024-10-15 22:41:55,979 INFO:Sent response: {'status': 'success', 'message': 'Peer 5951 registered'} to ('127.0.0.1', 32906)
+2024-10-15 22:41:55,980 INFO:Peer ('127.0.0.1', 32906) disconnected
+2024-10-15 22:42:13,305 INFO:Peer connected from ('127.0.0.1', 46648)
+2024-10-15 22:42:13,305 INFO:Received request: {'action': 'get_peers'} from ('127.0.0.1', 46648)
+2024-10-15 22:42:13,305 INFO:Sent response: {'status': 'success', 'peers': {6000: ('127.0.0.1', 6000), 5560: ('127.0.0.1', 5560), 5951: ('127.0.0.1', 5951)}} to ('127.0.0.1', 46648)
+2024-10-15 22:42:16,499 INFO:Peer ('127.0.0.1', 46648) disconnected
+2024-10-15 22:42:16,501 INFO:Peer connected from ('127.0.0.1', 46658)
+2024-10-15 22:42:16,501 INFO:Received request: {'action': 'add_topic', 'topic': 'Global Warming', 'peer_id': 6000} from ('127.0.0.1', 46658)
+2024-10-15 22:42:16,501 INFO:Peer 6000 added topic 'Global Warming'
+2024-10-15 22:42:16,502 INFO:Peer connected from ('127.0.0.1', 46668)
+2024-10-15 22:42:16,502 INFO:Received request: {'action': 'delete_topic', 'topic': 'Global Warming', 'peer_id': 6000} from ('127.0.0.1', 46668)
+2024-10-15 22:42:16,502 INFO:Peer 6000 deleted topic 'Global Warming'
+2024-10-15 22:42:16,502 INFO:Sent response: {'status': 'success', 'message': "Topic 'Global Warming' added for peer 6000"} to ('127.0.0.1', 46658)
+2024-10-15 22:42:16,503 INFO:Peer ('127.0.0.1', 46658) disconnected
+2024-10-15 22:42:16,503 INFO:Sent response: {'status': 'success', 'message': "Topic 'Global Warming' deleted for peer 6000"} to ('127.0.0.1', 46668)
+2024-10-15 22:42:16,503 INFO:Peer ('127.0.0.1', 46668) disconnected
+2024-10-15 22:42:25,348 INFO:Peer connected from ('127.0.0.1', 53306)
+2024-10-15 22:42:25,348 INFO:Received request: {'action': 'get_peers'} from ('127.0.0.1', 53306)
+2024-10-15 22:42:25,348 INFO:Sent response: {'status': 'success', 'peers': {6000: ('127.0.0.1', 6000), 5560: ('127.0.0.1', 5560), 5951: ('127.0.0.1', 5951)}} to ('127.0.0.1', 53306)
+2024-10-15 22:42:27,442 INFO:Peer ('127.0.0.1', 53306) disconnected
+2024-10-15 22:42:27,443 INFO:Peer connected from ('127.0.0.1', 53320)
+2024-10-15 22:42:27,443 INFO:Received request: {'action': 'add_topic', 'topic': 'Global Warming', 'peer_id': 6000} from ('127.0.0.1', 53320)
+2024-10-15 22:42:27,443 INFO:Peer 6000 added topic 'Global Warming'
+2024-10-15 22:42:27,444 INFO:Sent response: {'status': 'success', 'message': "Topic 'Global Warming' added for peer 6000"} to ('127.0.0.1', 53320)
+2024-10-15 22:42:27,444 INFO:Peer ('127.0.0.1', 53320) disconnected
+2024-10-15 22:42:27,444 INFO:Peer connected from ('127.0.0.1', 53326)
+2024-10-15 22:42:27,445 INFO:Received request: {'action': 'delete_topic', 'topic': 'Global Warming', 'peer_id': 6000} from ('127.0.0.1', 53326)
+2024-10-15 22:42:27,445 INFO:Peer 6000 deleted topic 'Global Warming'
+2024-10-15 22:42:27,445 INFO:Sent response: {'status': 'success', 'message': "Topic 'Global Warming' deleted for peer 6000"} to ('127.0.0.1', 53326)
+2024-10-15 22:42:27,445 INFO:Peer ('127.0.0.1', 53326) disconnected
+2024-10-15 22:42:31,083 INFO:Peer connected from ('127.0.0.1', 53422)
+2024-10-15 22:42:31,084 INFO:Received request: {'action': 'get_peers'} from ('127.0.0.1', 53422)
+2024-10-15 22:42:31,084 INFO:Sent response: {'status': 'success', 'peers': {6000: ('127.0.0.1', 6000), 5560: ('127.0.0.1', 5560), 5951: ('127.0.0.1', 5951)}} to ('127.0.0.1', 53422)
+2024-10-15 22:42:32,968 INFO:Peer ('127.0.0.1', 53422) disconnected
+2024-10-15 22:42:32,969 INFO:Peer connected from ('127.0.0.1', 53436)
+2024-10-15 22:42:32,970 INFO:Received request: {'action': 'add_topic', 'topic': 'Global Warming', 'peer_id': 6000} from ('127.0.0.1', 53436)
+2024-10-15 22:42:32,970 INFO:Peer 6000 added topic 'Global Warming'
+2024-10-15 22:42:32,971 INFO:Sent response: {'status': 'success', 'message': "Topic 'Global Warming' added for peer 6000"} to ('127.0.0.1', 53436)
+2024-10-15 22:42:32,971 INFO:Peer ('127.0.0.1', 53436) disconnected
+2024-10-15 22:42:32,971 INFO:Peer connected from ('127.0.0.1', 53444)
+2024-10-15 22:42:32,971 INFO:Received request: {'action': 'delete_topic', 'topic': 'Global Warming', 'peer_id': 6000} from ('127.0.0.1', 53444)
+2024-10-15 22:42:32,971 INFO:Peer 6000 deleted topic 'Global Warming'
+2024-10-15 22:42:32,981 INFO:Sent response: {'status': 'success', 'message': "Topic 'Global Warming' deleted for peer 6000"} to ('127.0.0.1', 53444)
+2024-10-15 22:42:32,981 INFO:Peer ('127.0.0.1', 53444) disconnected
+2024-10-15 22:42:37,122 INFO:Peer connected from ('127.0.0.1', 53456)
+2024-10-15 22:42:37,122 INFO:Received request: {'action': 'get_peers'} from ('127.0.0.1', 53456)
+2024-10-15 22:42:37,122 INFO:Sent response: {'status': 'success', 'peers': {6000: ('127.0.0.1', 6000), 5560: ('127.0.0.1', 5560), 5951: ('127.0.0.1', 5951)}} to ('127.0.0.1', 53456)
+2024-10-15 22:42:41,065 INFO:Peer ('127.0.0.1', 53456) disconnected
