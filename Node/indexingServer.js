@@ -25,7 +25,7 @@ class IndexingServer {
     socket.on('data', (data) => {
       const request = JSON.parse(data.toString());
       log(`Received request: ${JSON.stringify(request)}`);
-      const response = this.processRequest(request);
+      const response = this.processRequest(request, socket.remoteAddress); // Use socket.remoteAddress as host
       socket.write(JSON.stringify(response));
       log(`Sent response: ${JSON.stringify(response)}`);
     });
@@ -34,10 +34,10 @@ class IndexingServer {
   }
 
   // Process requests from peers
-  processRequest(request) {
+  processRequest(request, remoteAddress) {
     switch (request.action) {
       case 'register':
-        return this.registerPeer(request.peer_id, request.host, request.peer_port);
+        return this.registerPeer(request.peer_id, remoteAddress, request.peer_port); // Use remoteAddress as the peer host
       case 'get_peers':
         return this.getPeers();
       case 'create_topic':
@@ -51,7 +51,7 @@ class IndexingServer {
   registerPeer(peer_id, host, port) {
     this.peers[peer_id] = { host, port };
     log(`Registered peer ${peer_id} at ${host}:${port}`);
-    return { status: 'success', message: `Peer ${peer_id} registered` };
+    return { status: 'success', message: `Peer ${peer_id} registered at ${host}:${port}` };
   }
 
   // Return list of peers

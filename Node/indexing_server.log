@@ -60,3 +60,24 @@
 2024-10-15T20:54:34.299Z Sent response: {"status":"success","message":"Peer 8002 registered"}
 2024-10-15T20:54:41.687Z Received request: {"action":"get_peers"}
 2024-10-15T20:54:41.687Z Sent response: {"status":"success","peers":{"8001":{"port":"8001"},"8002":{"port":"8002"},"8003":{"port":"8003"}}}
+2024-10-15T20:58:44.733Z Indexing server started on localhost:9000
+2024-10-15T20:58:54.465Z Received request: {"action":"register","peer_id":"8001","peer_port":"8001"}
+2024-10-15T20:58:54.465Z Registered peer 8001 at ::1:8001
+2024-10-15T20:58:54.465Z Sent response: {"status":"success","message":"Peer 8001 registered at ::1:8001"}
+2024-10-15T20:58:58.751Z Received request: {"action":"register","peer_id":"8003","peer_port":"8003"}
+2024-10-15T20:58:58.751Z Registered peer 8003 at ::1:8003
+2024-10-15T20:58:58.752Z Sent response: {"status":"success","message":"Peer 8003 registered at ::1:8003"}
+2024-10-15T20:59:02.287Z Received request: {"action":"register","peer_id":"8002","peer_port":"8002"}
+2024-10-15T20:59:02.287Z Registered peer 8002 at ::1:8002
+2024-10-15T20:59:02.287Z Sent response: {"status":"success","message":"Peer 8002 registered at ::1:8002"}
+2024-10-15T20:59:08.035Z Received request: {"action":"get_peers"}
+2024-10-15T20:59:08.036Z Sent response: {"status":"success","peers":{"8001":{"host":"::1","port":"8001"},"8002":{"host":"::1","port":"8002"},"8003":{"host":"::1","port":"8003"}}}
+2024-10-15T20:59:15.131Z Received request: {"action":"get_peers"}
+2024-10-15T20:59:15.131Z Sent response: {"status":"success","peers":{"8001":{"host":"::1","port":"8001"},"8002":{"host":"::1","port":"8002"},"8003":{"host":"::1","port":"8003"}}}
+2024-10-15T20:59:16.991Z Received request: {"action":"create_topic","topic":"Global Warming","peer_id":6000}
+2024-10-15T20:59:16.991Z Created topic 'Global Warming' by peer 6000
+2024-10-15T20:59:16.991Z Sent response: {"status":"success","message":"Topic 'Global Warming' created"}
+2024-10-15T20:59:40.961Z Received request: {"action":"get_peers"}
+2024-10-15T20:59:40.961Z Sent response: {"status":"success","peers":{"8001":{"host":"::1","port":"8001"},"8002":{"host":"::1","port":"8002"},"8003":{"host":"::1","port":"8003"}}}
+2024-10-15T20:59:43.719Z Received request: {"action":"create_topic","topic":"Global Warming","peer_id":6000}
+2024-10-15T20:59:43.719Z Sent response: {"status":"error","message":"Topic 'Global Warming' already exists."}
